@@ -59,12 +59,12 @@ class Product(models.Model):
     name = models.CharField(max_length = 50)
     img = models.ImageField(null=True, blank=True)
     measures = models.CharField(max_length = 50, null = True, blank = True)
-    #quantity = models.IntegerField(null=True)
+    #quantity = models.IntegerField(null=True, blank = True)
     description = models.TextField(null = True, blank = True)
     price_per_day = models.FloatField()
     is_available = models.BooleanField(default= True)
     category = models.CharField(max_length=2, choices = CATEGORY_CHOICES)
-    #color = models.ManyToManyField(Color, null = True, blank = True)
+    color = models.ManyToManyField(Color, null = True, blank = True)
     #theme = models.ManyToManyField(Theme, null = True, blank = True)
 
 

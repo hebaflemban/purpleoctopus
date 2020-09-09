@@ -27,21 +27,10 @@ class ThemeForm(forms.ModelForm):
         model = Theme
         fields = '__all__'
 
-COLOR_CHOICES =[("BL", "Black"),
-                ("WH", "White"),
-                ("GY", "Gray"),
-                ("BR", "Browns"),
-                ("GR", "Green"),
-                ("BU", "Blue"),
-                ("PU", "Purple"),
-                ("RE", "Red"),
-                ("OR", "Orange"),
-                ("YE", "Yellow"),
-]
 
 class ProductForm(forms.ModelForm):
     #color = forms.MultipleChoiceField(choices = COLOR_CHOICES)
 
     class Meta:
         model = Product
-        exclude = ['color', 'theme']
+        fields = '__all__'

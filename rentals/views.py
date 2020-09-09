@@ -71,12 +71,15 @@ def return_product(request): #update?
 def add_product(request):
     #if request.user.is_staff():
     p_form = ProductForm()
-    #t_form = ColorForm()
-    #c_form = ThemeForm()
+    c_form = ColorForm()
+    #t_form = ThemeForm()
     if request.method == 'POST':
         p_form = ProductForm(request.POST, request.FILES)
-        if p_form.is_valid():
-            p_form.save()
+        if p_form.is_valid() and c_form.is_valid() :
+            product = p_form.save(commit=False)
+            color = c_form.cleaned_data['color']
+            #color = c_form.save()
+            product.color = color
             #t_form.svae()
             #c_form.save()
             messages.success(request, 'Product Added to shop successfully!')
@@ -92,7 +95,7 @@ def add_product(request):
     context = {
         'p_form' : p_form,
         #'t_form' : t_form,
-        #'c_form' : c_form
+        'c_form' : c_form
     }
 
     return render (request, 'product_form.html', context)
