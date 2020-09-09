@@ -26,6 +26,8 @@ urlpatterns = [
     path('purpleoctopus/logout/', views.logout, name = 'logout_page'),
     path('purpleoctopus/notif/', views.notification, name = 'notification_page'),
 
+    path('purpleoctopus/add_product/', views.add_product, name = 'add_product_page'),
+
 
 
 

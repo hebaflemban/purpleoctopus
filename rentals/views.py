@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import MembershipForm, LoginForm, ProductForm
+from .forms import MembershipForm, LoginForm, ProductForm, ColorForm, ThemeForm
 from .models import Product
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -70,8 +70,32 @@ def return_product(request): #update?
 
 def add_product(request):
     #if request.user.is_staff():
+    p_form = ProductForm()
+    #t_form = ColorForm()
+    #c_form = ThemeForm()
+    if request.method == 'POST':
+        p_form = ProductForm(request.POST, request.FILES)
+        if p_form.is_valid():
+            p_form.save()
+            #t_form.svae()
+            #c_form.save()
+            messages.success(request, 'Product Added to shop successfully!')
+            return redirect ('notification_page')
+    '''
+        else:
+            messages.warning(request, 'Ask a coordinato for help!')
+            return redirect ('notification_page')
 
-    return render (request, '.html', context)
+    else:
+        return redirect ('login_page')
+    '''
+    context = {
+        'p_form' : p_form,
+        #'t_form' : t_form,
+        #'c_form' : c_form
+    }
+
+    return render (request, 'product_form.html', context)
 
 
 def edit_product(request):

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Product
+from .models import Product, Theme, Color
 
 class LoginForm(forms.Form):
     username = forms.CharField(required = True)
@@ -16,8 +16,32 @@ class MembershipForm(forms.ModelForm):
             'password' : forms.PasswordInput(),
         }
 
+class ColorForm(forms.ModelForm):
+    class Meta:
+        model = Color
+        fields = '__all__'
+
+
+class ThemeForm(forms.ModelForm):
+    class Meta:
+        model = Theme
+        fields = '__all__'
+
+COLOR_CHOICES =[("BL", "Black"),
+                ("WH", "White"),
+                ("GY", "Gray"),
+                ("BR", "Browns"),
+                ("GR", "Green"),
+                ("BU", "Blue"),
+                ("PU", "Purple"),
+                ("RE", "Red"),
+                ("OR", "Orange"),
+                ("YE", "Yellow"),
+]
 
 class ProductForm(forms.ModelForm):
+    #color = forms.MultipleChoiceField(choices = COLOR_CHOICES)
+
     class Meta:
         model = Product
-        fields = '__all__'
+        exclude = ['color', 'theme']
